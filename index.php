@@ -1,3 +1,21 @@
+<?php
+    require("conn.php");
+
+    $tabela = $pdo->prepare("SELECT id_prod, descricao_prod,categoria_prod,preco_prod,quant_prod,comentario_prod
+    FROM produtos;");
+    $tabela->execute();
+    $rowTabela = $tabela->fetchAll();
+    
+    if (empty($rowTabela)){
+        echo "<script>
+        alert('Tabela vazia!!!');
+        </script>";
+    }
+
+
+?>
+<fundo>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,8 +51,6 @@
                     echo "<td>".$linha['preco_prod']."</td>";
                     echo "<td>".$linha['quant_prod']."</td>";
                     echo "<td>".$linha['comentario_prod']."</td>";
-                    echo '<td><a href=edit_tabela.php?produto='.$linha['id_prod'].' class="button2"><b>EDITAR</b</a></td>';
-                    echo '<td><a href=CRUD\del_sol.php?produto='.$linha['id_prod'].' class="entregar"><b>ENTREGAR</b></a></td>';
                     echo '</tr>';
                 }
             ?>
